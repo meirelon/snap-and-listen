@@ -1,0 +1,5 @@
+python-telegram-bot==11.1.0
+spotipy==2.4.4
+google-cloud-storage
+Pillow>=2.0.0
+requests
