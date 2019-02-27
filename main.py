@@ -25,19 +25,16 @@ def snap_and_listen(request):
                 upload_blob(bucket_name=os.environ["GCS_BUCKET"], source_file_name="/tmp/photo.jpg", destination_blob_name="photo.jpg")
 
                 r = get_vision_request(key=os.environ["VISION_API_KEY"], bucket_path=os.environ["GCS_BUCKET"])
-                emotion = get_emotion(r)
-                SPOTIPY_CLIENT_ID = os.environ["SPOTIPY_CLIENT_ID"]
-                SPOTIPY_CLIENT_SECRET = os.environ['SPOTIPY_CLIENT_SECRET']
+                keyword = get_image_keyword(r)
 
                 playlist = get_playlist(clientID=os.environ["SPOTIPY_CLIENT_ID"],
                                         clientSECRET=os.environ['SPOTIPY_CLIENT_SECRET'],
-                                        emotion=emotion)
+                                        keyword=keyword)
 
-                full_response = "Here is your {emotion} playlist: {playlist}".format(emotion=emotion, playlist=playlist)
+                full_response = "Here is your {keyword} playlist: {playlist}".format(keyword=keyword, playlist=playlist)
+
                 bot.sendMessage(chat_id=chat_id, text=full_response)
-
-
             except Exception as e:
                 bot.sendMessage(chat_id=chat_id, text=str(e))
-    else:
-        bot.sendMessage(chat_id=chat_id, text="Please send a selfie")
+        else:
+            bot.sendMessage(chat_id=chat_id, text="Please send a picture")        

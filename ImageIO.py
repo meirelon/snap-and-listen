@@ -24,8 +24,12 @@ def get_vision_request(key, bucket_path):
                 "maxResults" : 1
             },
             {
-                "type": "WEB_DETECTION",
-                "maxResults": 2
+                  "type": "LANDMARK_DETECTION",
+                  "maxResults": 1
+            },
+            {
+                  "type": "WEB_DETECTION",
+                  "maxResults": 1
             },
           ]
         }
@@ -45,3 +49,16 @@ def get_emotion(r):
         return emotion_list[0]
     else:
         return "neutral"
+
+def get_image_keyword(r):
+    responses = r.json().get("responses")[0]
+    if any([x == "faceAnnotations" for x in responses.keys()]):
+        if responses.get("faceAnnotations")[0].get("detectionConfidence") > 0.8:
+            keyword = get_emotion(r)
+        else:
+            # keyword = responses.get("webDetection").get("webEntities")[0].get("description")
+            keyword = responses.get("webDetection").get("bestGuessLabels")[0].get("label")
+    else:
+        # keyword = responses.get("webDetection").get("webEntities")[0].get("description")
+        keyword = responses.get("webDetection").get("bestGuessLabels")[0].get("label")
+    return keyword
