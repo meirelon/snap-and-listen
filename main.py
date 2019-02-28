@@ -14,10 +14,10 @@ def snap_and_listen(request):
         update = telegram.Update.de_json(request.get_json(force=True,
                                                           silent=True,
                                                           cache=True), bot)
+        chat_id = update.message.chat.id
 
         if update.message.photo:
             try:
-                chat_id = update.message.chat.id
                 fileID = update.message.photo[-1].file_id
                 file_info = bot.get_file(fileID)
                 photo_link = file_info.file_path
