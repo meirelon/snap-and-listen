@@ -3,9 +3,9 @@ import requests
 
 import telegram
 
-from ImageIO import get_image, get_vision_request, get_emotion, get_image_keyword
-from gcloud_utils import upload_blob
-from playlistSearch import get_playlist
+from images import get_image, get_vision_request, get_emotion, get_image_keyword
+from gcloud import upload_blob
+from playlists import get_playlist
 
 def snap_and_listen(request):
     bot = telegram.Bot(token=os.environ["TELEGRAM_TOKEN"])
