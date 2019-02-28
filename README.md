@@ -9,7 +9,7 @@ Project front end is a Telegram chat bot and the back end is GCP cloud functions
 ## Prerequisites
 
 * [Telegram chat bot](https://core.telegram.org/bots) - Front end used
-* [Google Cloud Platform Project](https://cloud.google.com/) - Back end
+* [Google Cloud Platform](https://cloud.google.com/) - Back end
 * [Cloud Functions API Enabled](https://cloud.google.com/functions/) - Webhook
 * [Cloud Vison API Enabled](https://cloud.google.com/vision/) - Image Recognition
 * [Spotify Developer Application](https://developer.spotify.com/) - Spotify Search API

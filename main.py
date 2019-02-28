@@ -8,7 +8,14 @@ from gcloud import upload_blob
 from playlists import get_playlist
 
 def snap_and_listen(request):
-    bot = telegram.Bot(token=os.environ["TELEGRAM_TOKEN"])
+    token = os.environ["TELEGRAM_TOKEN"]
+    bucket = os.environ["GCS_BUCKET"]
+    key = os.environ["VISION_API_KEY"]
+    spotify_client_id = os.environ["SPOTIPY_CLIENT_ID"]
+    spotify_secret = os.environ['SPOTIPY_CLIENT_SECRET']
+
+    # Initialize Telegram Bot
+    bot = telegram.Bot(token=token)
 
     if request.method == "POST":
         update = telegram.Update.de_json(request.get_json(force=True,
@@ -21,14 +28,23 @@ def snap_and_listen(request):
                 fileID = update.message.photo[-1].file_id
                 file_info = bot.get_file(fileID)
                 photo_link = file_info.file_path
-                get_image(photo_link)
-                upload_blob(bucket_name=os.environ["GCS_BUCKET"], source_file_name="/tmp/photo.jpg", destination_blob_name="photo.jpg")
 
-                r = get_vision_request(key=os.environ["VISION_API_KEY"], bucket_path=os.environ["GCS_BUCKET"])
+                # Process the image and store in GCS bucket
+                get_image(photo_link)
+                upload_blob(bucket_name=bucket,
+                            source_file_name="/tmp/photo.jpg",
+                            destination_blob_name="photo.jpg")
+
+                # Make the image recognition request to api
+                r = get_vision_request(key=key,
+                                       bucket_path=bucket)
+
+                # Get the keyword from the request above
                 keyword = get_image_keyword(r)
 
-                playlist = get_playlist(clientID=os.environ["SPOTIPY_CLIENT_ID"],
-                                        clientSECRET=os.environ['SPOTIPY_CLIENT_SECRET'],
+                # Keyword search the Public Spotify Playlist repository
+                playlist = get_playlist(clientID=spotify_client_id,
+                                        clientSECRET=spotify_secret,
                                         keyword=keyword)
 
                 full_response = "Here is your {keyword} playlist: {playlist}".format(keyword=keyword, playlist=playlist)
