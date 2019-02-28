@@ -1,2 +1,2 @@
 # snap-and-listen
-![alt text](https://storage.googleapis.com/telegram_images/snapandlisten_readme_photo.jpg)
+![alt text](https://raw.githubusercontent.com/meirelon/snap-and-listen/master/readme_images/grand_canyon.jpg)
