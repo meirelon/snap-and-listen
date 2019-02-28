@@ -3,9 +3,9 @@ import requests
 
 import telegram
 
-from ImageIO import get_image, get_emotion, get_vision_request
+from ImageIO import get_image, get_vision_request, get_emotion, get_image_keyword
 from gcloud_utils import upload_blob
-from spotipy import get_playlist
+from playlistSearch import get_playlist
 
 def snap_and_listen(request):
     bot = telegram.Bot(token=os.environ["TELEGRAM_TOKEN"])
@@ -37,4 +37,4 @@ def snap_and_listen(request):
             except Exception as e:
                 bot.sendMessage(chat_id=chat_id, text=str(e))
         else:
-            bot.sendMessage(chat_id=chat_id, text="Please send a picture")        
+            bot.sendMessage(chat_id=chat_id, text="Please send a picture")
