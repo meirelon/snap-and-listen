@@ -13,6 +13,14 @@ Project front end is a Telegram chat bot and the back end is GCP cloud functions
 * [Cloud Functions API Enabled](https://cloud.google.com/functions/) - Webhook
 * [Cloud Vison API Enabled](https://cloud.google.com/vision/) - Image Recognition
 * [Spotify Developer Application](https://developer.spotify.com/) - Spotify Search API
+* env.yaml file that includes all of your API key information
+
+## Deploy webhook
+```
+git clone
+cd snap-and-listen
+gcloud beta functions deploy snap_and_listen --env-vars-file env.yaml --runtime python37 --trigger-http
+```
 
 ## Examples
 ### Facial Recognition
