@@ -29,7 +29,7 @@ SPOTIPY_CLIENT_SECRET: mnopqr
 Then run the following in your terminal
 ```
 $ git clone https://github.com/meirelon/snap-and-listen.git
-$ cd ./snap-and-listen
+$ cd snap-and-listen
 $ gcloud beta functions deploy snap_and_listen --env-vars-file env.yaml --runtime python37 --trigger-http
 ```
 
