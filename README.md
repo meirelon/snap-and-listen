@@ -15,11 +15,22 @@ Project front end is a Telegram chat bot and the back end is GCP cloud functions
 * [Spotify Developer Application](https://developer.spotify.com/) - Spotify Search API
 * env.yaml file that includes all of your API key information
 
+
 ## Deploy webhook
+Example env.yaml file:
 ```
-git clone
-cd snap-and-listen
-gcloud beta functions deploy snap_and_listen --env-vars-file env.yaml --runtime python37 --trigger-http
+TELEGRAM_TOKEN: uvwxyz
+GCS_BUCKET: example-bucket
+VISION_API_KEY: abcdef
+SPOTIPY_CLIENT_ID: ghijkl
+SPOTIPY_CLIENT_SECRET: mnopqr
+```
+
+Then run the following in your terminal
+```
+$ git clone https://github.com/meirelon/snap-and-listen.git
+$ cd ./snap-and-listen
+$ gcloud beta functions deploy snap_and_listen --env-vars-file env.yaml --runtime python37 --trigger-http
 ```
 
 ## Examples
