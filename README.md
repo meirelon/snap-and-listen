@@ -48,4 +48,4 @@ Please reach out via email or send me a pull request.
 
 ## Authors
 
-* **Michael Nestel**
+* **Michael Nestel** 
