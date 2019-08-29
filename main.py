@@ -40,7 +40,8 @@ def snap_and_listen(request):
 
                 # Make the image recognition request to api
                 r = get_vision_request(key=key,
-                                       bucket_path=bucket)
+                                       bucket_path=bucket
+                                       image_name="photo-{}.jpg".format(photo_id))
 
                 # Get the keyword from the request above
                 keyword = get_image_keyword(r)
