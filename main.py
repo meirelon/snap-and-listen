@@ -1,5 +1,6 @@
 import os
 import requests
+import uuid
 
 import telegram
 
@@ -13,6 +14,8 @@ def snap_and_listen(request):
     key = os.environ["VISION_API_KEY"]
     spotify_client_id = os.environ["SPOTIPY_CLIENT_ID"]
     spotify_secret = os.environ['SPOTIPY_CLIENT_SECRET']
+    
+    photo_id = str(uuid.uuid4())
 
     # Initialize Telegram Bot
     bot = telegram.Bot(token=token)
@@ -32,8 +35,8 @@ def snap_and_listen(request):
                 # Process the image and store in GCS bucket
                 get_image(photo_link)
                 upload_blob(bucket_name=bucket,
-                            source_file_name="/tmp/photo.jpg",
-                            destination_blob_name="photo.jpg")
+                            source_file_name="/tmp/photo-{}.jpg".format(photo_id),
+                            destination_blob_name="photo-{}.jpg".format(photo_id))
 
                 # Make the image recognition request to api
                 r = get_vision_request(key=key,
