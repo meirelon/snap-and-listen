@@ -8,14 +8,14 @@ def get_image(url):
     img.save("/tmp/photo.jpg")
 
 
-def get_vision_request(key, bucket_path):
+def get_vision_request(key, bucket_path, image_name):
     vision_api = "https://vision.googleapis.com/v1/images:annotate?key={key}".format(key=key)
     remote_request_json = {
       "requests": [
         {
           "image": {
             "source": {
-              "imageUri": "https://storage.googleapis.com/" + bucket_path + "/photo.jpg"
+              "imageUri": "https://storage.googleapis.com/" + bucket_path + "/{}".format(image_name)
             }
           },
           "features": [
