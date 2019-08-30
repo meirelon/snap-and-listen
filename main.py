@@ -35,7 +35,7 @@ def snap_and_listen(request):
                 # Process the image and store in GCS bucket
                 get_image(photo_link)
                 upload_blob(bucket_name=bucket,
-                            source_file_name="/tmp/photo-{}.jpg".format(photo_id),
+                            source_file_name="/tmp/photo.jpg",
                             destination_blob_name="photo-{}.jpg".format(photo_id))
 
                 # Make the image recognition request to api
